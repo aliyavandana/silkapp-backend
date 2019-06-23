@@ -13,8 +13,9 @@ function checkLogin(body) {
     return new Promise((resolve, reject) => {
         let email = body.email;
         let password = body.password;
+        let user_type = body.user_type;
         console.log("just before query");
-         let newQuery = 'SELECT * FROM userdetails WHERE Email_Id=' + mysql.escape(email) + 'AND Password=' + mysql.escape(password);
+         let newQuery = 'SELECT * FROM User_Details WHERE Email_Id=' + mysql.escape(email) + 'AND Password=' + mysql.escape(password) + 'AND User_type_' + user_type +'= 1';
         connection.query(newQuery, function (error, userprofile, fields) {
             console.log(userprofile);
             // console.log(fields)
@@ -38,7 +39,9 @@ function addUser(body){
         let firstname = body.firstname;
         let lastname = body.lastname;
         let phonenumber = body.phonenumber;
-        let updateQuery =  "INSERT INTO userdetails (Email_Id, Password, Username, FirstName, LastName, PhoneNumber) VALUES (" + mysql.escape(email) +',' + mysql.escape(password) + ',' + mysql.escape(username) +','+ mysql.escape(firstname) +',' + mysql.escape(lastname) +','+ mysql.escape(phonenumber) + ')';
+        let user_type = body.user_type;
+        
+        let updateQuery =  "INSERT INTO User_Details (Email_Id, Password, Username, First_Name, Last_Name, Phone_Number, User_type_" + user_type +") VALUES (" + mysql.escape(email) +',' + mysql.escape(password) + ',' + mysql.escape(username) +','+ mysql.escape(firstname) +',' + mysql.escape(lastname) +','+ mysql.escape(phonenumber) + ',' + '1' + ')';
         connection.query(updateQuery, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
