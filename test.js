@@ -25,7 +25,8 @@ let req = {
         "lastname": "boni",
         "password": "aliya123",
         "phonenumber": "8448637285",
-        "username": "aliyaboni"
+        "username": "aliyaboni",
+        "user_type" : 'freelancer'
     }
 }
 database.addUser(req.body)

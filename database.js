@@ -42,6 +42,7 @@ function addUser(body){
         let user_type = body.user_type;
         
         let updateQuery =  "INSERT INTO User_Details (Email_Id, Password, Username, First_Name, Last_Name, Phone_Number, User_type_" + user_type +") VALUES (" + mysql.escape(email) +',' + mysql.escape(password) + ',' + mysql.escape(username) +','+ mysql.escape(firstname) +',' + mysql.escape(lastname) +','+ phonenumber + ',' + '1' + ')';
+        console.log(updateQuery)
         connection.query(updateQuery, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
