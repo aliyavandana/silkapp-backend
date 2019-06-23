@@ -2,9 +2,9 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: '127.0.0.1',
     port: '3306',
-    database: 'mydatabase',
+    database: 'silkapp',
     user: 'root',
-    password: 'silktechnologies',
+    password: '[your_new_pwd]',
     multipleStatements: true,
 });
 
