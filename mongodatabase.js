@@ -19,26 +19,34 @@ var mongoClient = require("mongodb").MongoClient;
 
 var server = "mongodb://localhost:27017/silkAppDatabase";
 
-mongoClient.connect(server, function (error, db) {
-    if (error)
-        console.log("Error while connecting to database: ", error);
-    else
-        console.log("Connection established successfully");
-    
-        var freelancer = db.collection('freelancer');
+function addUserData(body) {
+    return new Promise((resolve, reject) => {
 
-    var filter = {};
+        
+        mongoClient.connect(server, function (error, db) {
+            if (error)
+                console.log("Error while connecting to database: ", error);
+            else
+                console.log("Connection established successfully");
 
-    freelancer.find(filter).toArray(function (error, documents) {
-        if (error)
-            console.log("Error: ", error);
-        else {
-            documents.forEach(function (doc) {
-                console.log(doc);
+            var freelancer = db.collection('freelancer');
+
+            var filter = {};
+
+            freelancer.find(filter).toArray(function (error, documents) {
+                if (error)
+                    console.log("Error: ", error);
+                else {
+                    documents.forEach(function (doc) {
+                        console.log(doc);
+                    });
+                }
             });
-        }
-    });
-    //perform operations here
+            //perform operations here
 
-    db.close();
-});
+            db.close();
+        });
+    })
+}
+
+module.exports.addUserData = addUserData;

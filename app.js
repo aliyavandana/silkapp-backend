@@ -1,5 +1,6 @@
 var express = require('express');
-var database = require('./database')
+var database = require('./database');
+var mongodatabase = require('./mongodatabase');
 const app = express();
 const port = 3000;
 
@@ -40,7 +41,17 @@ app.post('/signupCredentials',(req, res) => {
     })
 })
 
-
+app.post('/mongoFreelancer',(req, res) => {
+    console.log("body is  : ",  req.body);
+    mongodatabase.addUserData(req.body)
+    .then(result =>{
+        if(result) {
+            res.send({status : "Success"});
+        } else {
+            res.send({status : "Failed"});
+        }
+    })
+})
 
 // app.post('/getData', function (req, res) {
 // 	console.log('receiving data ...');
