@@ -39,9 +39,12 @@ function addUser(body){
         let firstname = body.firstname;
         let lastname = body.lastname;
         let phonenumber = body.phonenumber;
+        let countrytext = body.countrytext;
+        let city = body.city;
+        let accountnumber = body.accountnumber;
         let user_type = body.user_type;
         
-        let updateQuery =  "INSERT INTO User_Details (Email_Id, Password, Username, First_Name, Last_Name, Phone_Number, User_type_" + user_type +") VALUES (" + mysql.escape(email) +',' + mysql.escape(password) + ',' + mysql.escape(username) +','+ mysql.escape(firstname) +',' + mysql.escape(lastname) +','+ mysql.escape(phonenumber) + ',' + '1' + ')';
+        let updateQuery =  "INSERT INTO User_Details (Email_Id, Password, Username, First_Name, Last_Name, Phone_Number, User_type_" + user_type +", country, city, accountnumber) VALUES (" + mysql.escape(email) +',' + mysql.escape(password) + ',' + mysql.escape(username) +','+ mysql.escape(firstname) +',' + mysql.escape(lastname) +','+ mysql.escape(phonenumber) + ',' + '1' +','+ mysql.escape(countrytext) + ',' + mysql.escape(city) + ',' + mysql.escape(accountnumber) + ')';
         console.log(updateQuery)
         connection.query(updateQuery, function (err, result) {
             if (err) throw err;
