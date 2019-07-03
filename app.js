@@ -53,6 +53,17 @@ app.post('/mongoFreelancer',(req, res) => {
     })
 })
 
+app.post('/mongoClientJob',(req, res) => {
+    console.log("body is  : ",  req.body);
+    mongodatabase.addJob(req.body)
+    .then(result =>{
+        if(result) {
+            res.send({status : "Success"});
+        } else {
+            res.send({status : "Failed"});
+        }
+    })
+})
 // app.post('/getData', function (req, res) {
 // 	console.log('receiving data ...');
 // 	console.log('body is ', req.body);
