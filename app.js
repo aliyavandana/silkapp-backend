@@ -77,6 +77,17 @@ app.get('/allFreelancers',(req, res) => {
         res.send({'data' : freelancersArray});
     })
 })
+
+app.get('/allJobs',(req, res) => {
+    // console.log("body is  : ",  req.body);
+    mongodatabase.getAllJobs(req.body)
+    .then(jobsArray =>{
+        res.send({'data' : jobsArray});
+    })
+})
+
+// allJobs
+
 // app.post('/getData', function (req, res) {
 // 	console.log('receiving data ...');
 // 	console.log('body is ', req.body);

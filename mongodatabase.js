@@ -91,6 +91,36 @@ function getFreelancers() {
     })
 }
 
+function getAllJobs () {
+    return new Promise((resolve, reject) => {
+
+        
+        mongoClient.connect(server, function (error, db) {
+            if (error)
+                console.log("Error while connecting to database: ", error);
+            else
+                console.log("Connection established successfully");
+
+            var jobs = db.collection('jobs_created');
+
+            var filter = {};
+
+            // let allfreelancers = [];
+            
+            jobs.find(filter).toArray(function (error, documents) {
+                if (error)
+                    console.log("Error: ", error);
+                else {
+                    resolve(documents)
+                }
+            });
+            db.close();
+        });
+    })
+
+}
+
 module.exports.addUserData = addUserData;
 module.exports.addJob = addJob;
 module.exports.getFreelancers = getFreelancers;
+module.exports.getAllJobs = getAllJobs;
