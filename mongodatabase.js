@@ -22,7 +22,7 @@ var server = "mongodb://localhost:27017/silkAppDatabase";
 function addUserData(body) {
     return new Promise((resolve, reject) => {
 
-        
+
         mongoClient.connect(server, function (error, db) {
             if (error)
                 console.log("Error while connecting to database: ", error);
@@ -31,22 +31,17 @@ function addUserData(body) {
 
             var freelancer = db.collection('freelancer');
 
-            var filter = {};
-
-            freelancer.find(filter).toArray(function (error, documents) {
-                if (error)
-                    console.log("Error: ", error);
-                else {
-                    documents.forEach(function (doc) {
-                        console.log(doc);
-                    });
+            freelancer.insertOne(body, function (err, res) {
+                if (err) {
+                    resolve(false)
+                } else {
+                    console.log("1 record inserted");
+                    resolve(true)
                 }
-            });
-            //perform operations here
 
-            db.close();
-        });
+                db.close();
+            });
+        })
     })
 }
-
 module.exports.addUserData = addUserData;
