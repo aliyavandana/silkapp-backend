@@ -69,15 +69,17 @@ function getFreelancers() {
 
             var filter = {};
 
-            let allfreelancers = [];
+            // let allfreelancers = [];
+            
             freelancer.find(filter).toArray(function (error, documents) {
                 if (error)
                     console.log("Error: ", error);
                 else {
-                    documents.forEach(function (doc) {
-                        allfreelancers.push(doc)
-                        console.log(doc);
-                    });
+                    // documents.forEach(function (doc) {
+                    //     allfreelancers.push(doc)
+                    //     console.log(doc);
+                    // });
+                    resolve(documents)
                 }
             });
 
