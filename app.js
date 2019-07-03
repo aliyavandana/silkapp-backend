@@ -64,6 +64,19 @@ app.post('/mongoClientJob',(req, res) => {
         }
     })
 })
+
+app.get('/allFreelancers',(req, res) => {
+    // console.log("body is  : ",  req.body);
+    mongodatabase.getFreelancers(req.body)
+    .then(freelancersArray =>{
+        // if(result) {
+        //     res.send({status : "Success"});
+        // } else {
+        //     res.send({status : "Failed"});
+        // }
+        res.send({'data' : freelancersArray});
+    })
+})
 // app.post('/getData', function (req, res) {
 // 	console.log('receiving data ...');
 // 	console.log('body is ', req.body);
