@@ -83,7 +83,7 @@ function getFreelancers() {
                 }
             });
 
-            resolve(allfreelancers);
+            // resolve(allfreelancers);
             //perform operations here
 
             db.close();
