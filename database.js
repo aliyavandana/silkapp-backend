@@ -92,6 +92,35 @@ function findUser(body) {
     })
 }
 
+function updateTable (body) {
+    return new Promise((resolve, reject) => {
+ 
+        let Client_like =  body.Client_like;
+        let User_name  = body.User_name;
+        let job_id = body.job_id;
+        let Freelancer_like = body.Freelancer_like;
+
+        let newQuery;
+        if(Freelancer_like == undefined) {
+            newQuery = "INSERT INTO companies (job_id, Client_like, User_name) VALUES ("+ mysql.escape(job_id) +"," + mysql.escape(Client_like) + "," + mysql.escape(User_name) + ") ON DUPLICATE KEY UPDATE job_id = "+mysql.escape(job_id) +" Client_like = " + mysql.escape(Client_like) +"User_name =" + mysql.escape(User_name);
+
+        } else if (Client_like == undefined) {
+            newQuery = "INSERT INTO companies (job_id, Freelancer_like, User_name) VALUES ("+ mysql.escape(job_id) +"," + mysql.escape(Freelancer_like) + "," + mysql.escape(User_name) + ") ON DUPLICATE KEY UPDATE job_id = "+mysql.escape(job_id) +" Freelancer_like = " + mysql.escape(Freelancer_like) +"User_name =" + mysql.escape(User_name);
+
+        }
+
+
+        connection.query(newQuery, function (error, userprofile, fields) {
+            console.log(userprofile);
+            console.log('inside the the query');
+            if (error)
+                throw error;
+            resolve(userprofile)
+        })
+    })
+}
+
 module.exports.checkLogin = checkLogin;
 module.exports.addUser = addUser;
 module.exports.findUser = findUser;
+module.exports.updateTable = updateTable;

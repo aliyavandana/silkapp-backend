@@ -106,6 +106,18 @@ app.post('/getJobId',(req, res) => {
     })
 })
 
+app.post('/updateMatchTable',(req, res) => {
+    // console.log("body is  : ",  req.body);
+    database.updateTable(req.body)
+    .then(result =>{
+        if(result) {
+            res.send(result);
+        } else {
+            res.send(result);
+        }
+    })
+})
+
 // allJobs
 
 // app.post('/getData', function (req, res) {
