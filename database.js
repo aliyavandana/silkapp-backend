@@ -15,7 +15,13 @@ function checkLogin(body) {
         let password = body.password;
         let user_type = body.user_type;
         console.log("just before query");
-         let newQuery = 'SELECT * FROM User_Details WHERE Email_Id=' + mysql.escape(email) + 'AND Password=' + mysql.escape(password) + 'AND User_type_' + user_type +'= 1';
+        let newQuery;
+        if(email.includes('@')) {
+         newQuery = 'SELECT * FROM User_Details WHERE Email_Id=' + mysql.escape(email) + 'AND Password=' + mysql.escape(password) + 'AND User_type_' + user_type +'= 1';
+        } else {
+            newQuery = 'SELECT * FROM User_Details WHERE Username=' + mysql.escape(email) + 'AND Password=' + mysql.escape(password) + 'AND User_type_' + user_type +'= 1';
+
+        }
         connection.query(newQuery, function (error, userprofile, fields) {
             console.log(userprofile);
             // console.log(fields)
@@ -56,5 +62,33 @@ function addUser(body){
     })
 }
 
+function findUser(body) {
+    // console.log(connection);
+    return new Promise((resolve, reject) => {
+        let email = body.email;
+        let newQuery;
+        if(email.includes('@')) {
+         newQuery = 'SELECT * FROM User_Details WHERE Email_Id=' + mysql.escape(email) + 'AND Password=' + mysql.escape(password) + 'AND User_type_' + user_type +'= 1';
+        } else {
+            newQuery = 'SELECT * FROM User_Details WHERE Username=' + mysql.escape(email) + 'AND Password=' + mysql.escape(password) + 'AND User_type_' + user_type +'= 1';
+        }
+
+        connection.query(newQuery, function (error, userprofile, fields) {
+            console.log(userprofile);
+            // console.log(fields)
+            console.log('inside the the query');
+            if (error)
+                throw error;
+            // if (userprofile.length === 1) {
+            //     resolve(true);
+            // } else {
+            //     resolve(false);
+            // }
+            resolve(userprofile)
+        })
+    })
+}
+
 module.exports.checkLogin = checkLogin;
 module.exports.addUser = addUser;
+module.exports.findUser = findUser;

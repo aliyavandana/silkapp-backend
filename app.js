@@ -86,6 +86,18 @@ app.get('/allJobs',(req, res) => {
     })
 })
 
+app.post('/userDetails',(req, res) => {
+    // console.log("body is  : ",  req.body);
+    database.findUser(req.body)
+    .then(result =>{
+        if(result) {
+            res.send(result);
+        } else {
+            res.send(result);
+        }
+    })
+})
+
 // allJobs
 
 // app.post('/getData', function (req, res) {
