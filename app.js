@@ -98,6 +98,14 @@ app.post('/userDetails',(req, res) => {
     })
 })
 
+app.post('/getJobId',(req, res) => {
+
+    mongodatabase.getJob(req.body)
+    .then(JobId =>{
+        res.send({'jobid' : JobId});
+    })
+})
+
 // allJobs
 
 // app.post('/getData', function (req, res) {
