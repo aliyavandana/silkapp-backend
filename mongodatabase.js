@@ -130,13 +130,13 @@ function getJob(body) {
             else
                 console.log("Connection established successfully");
 
-            var freelancer = db.collection('freelancer');
+            var jobs = db.collection('jobs_created');
 
             var filter = body;
 
             // let allfreelancers = [];
             
-            freelancer.find(filter).toArray(function (error, documents) {
+            jobs.find(filter).toArray(function (error, documents) {
                 if (error)
                     console.log("Error: ", error);
                 else {
