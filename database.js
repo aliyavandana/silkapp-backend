@@ -102,10 +102,10 @@ function updateTable (body) {
 
         let newQuery;
         if(Freelancer_like == undefined) {
-            newQuery = "INSERT INTO companies (job_id, Client_like, User_name) VALUES ("+ mysql.escape(job_id) +"," + mysql.escape(Client_like) + "," + mysql.escape(User_name) + ") ON DUPLICATE KEY UPDATE job_id = "+mysql.escape(job_id) +" Client_like = " + mysql.escape(Client_like) +"User_name =" + mysql.escape(User_name);
+            newQuery = "INSERT INTO Match_Table (job_id, Client_like, User_name) VALUES ("+ mysql.escape(job_id) +"," + mysql.escape(Client_like) + "," + mysql.escape(User_name) + ") ON DUPLICATE KEY UPDATE job_id = "+mysql.escape(job_id) +" Client_like = " + mysql.escape(Client_like) +"User_name =" + mysql.escape(User_name);
 
         } else if (Client_like == undefined) {
-            newQuery = "INSERT INTO companies (job_id, Freelancer_like, User_name) VALUES ("+ mysql.escape(job_id) +"," + mysql.escape(Freelancer_like) + "," + mysql.escape(User_name) + ") ON DUPLICATE KEY UPDATE job_id = "+mysql.escape(job_id) +" Freelancer_like = " + mysql.escape(Freelancer_like) +"User_name =" + mysql.escape(User_name);
+            newQuery = "INSERT INTO Match_Table (job_id, Freelancer_like, User_name) VALUES ("+ mysql.escape(job_id) +"," + mysql.escape(Freelancer_like) + "," + mysql.escape(User_name) + ") ON DUPLICATE KEY UPDATE job_id = "+mysql.escape(job_id) +" Freelancer_like = " + mysql.escape(Freelancer_like) +"User_name =" + mysql.escape(User_name);
 
         }
 
