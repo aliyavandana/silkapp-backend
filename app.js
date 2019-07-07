@@ -110,11 +110,14 @@ app.post('/updateMatchTable',(req, res) => {
     // console.log("body is  : ",  req.body);
     database.updateTable(req.body)
     .then(result =>{
-        if(result) {
-            res.send(result);
-        } else {
-            res.send(result);
-        }
+        database.checkMatch(req.body.job_id).then(response => {
+            res.send(response)
+        })
+        // if(result) {
+        //     res.send(result);
+        // } else {
+        //     res.send(result);
+        // }
     })
 })
 

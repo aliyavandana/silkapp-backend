@@ -103,20 +103,41 @@ function updateTable (body) {
         let newQuery;
         if(Freelancer_like == undefined) {
             newQuery = "INSERT INTO Match_Table (job_id, Client_like, User_name) VALUES ("+ mysql.escape(job_id) +"," + mysql.escape(Client_like) + "," + mysql.escape(User_name) + ") ON DUPLICATE KEY UPDATE job_id = "+mysql.escape(job_id) +", Client_like = " + mysql.escape(Client_like) +",User_name =" + mysql.escape(User_name);
-
         } else if (Client_like == undefined) {
             newQuery = "INSERT INTO Match_Table (job_id, Freelancer_like, User_name) VALUES ("+ mysql.escape(job_id) +"," + mysql.escape(Freelancer_like) + "," + mysql.escape(User_name) + ") ON DUPLICATE KEY UPDATE job_id = "+mysql.escape(job_id) +" ,Freelancer_like = " + mysql.escape(Freelancer_like) +",User_name =" + mysql.escape(User_name);
 
         }
-
-
         connection.query(newQuery, function (error, userprofile, fields) {
             console.log(userprofile);
             console.log('inside the the query');
             if (error)
                 throw error;
-            resolve(userprofile)
+            resolve({userprofile})
         })
+    })
+}
+
+function checkMatch(job_id) {
+    return new Promise((resolve, reject) => {
+        let newQuery = 'SELECT * FROM Match_Table WHERE job_id=' + mysql.escape(job_id);
+
+        connection.query(newQuery, function (error, userprofile, fields) {
+            console.log(userprofile[0]);
+            if (error)
+                throw error;
+                if(userprofile[0].Client_like == 1 && userprofile[0].Freelancer_like == 1) {
+                    let query = "UPDATE Match_Table SET Match_Status = '1' WHERE job_id = " + mysql.escape(job_id);
+                    connection.query(newQuery, function (error, userprofile, fields) {
+                        console.log(userprofile);
+                        console.log('inside the the query');
+                        if (error)
+                            throw error;
+                        resolve({userprofile})
+                    })   
+                }
+        })
+
+ 
     })
 }
 
@@ -124,3 +145,4 @@ module.exports.checkLogin = checkLogin;
 module.exports.addUser = addUser;
 module.exports.findUser = findUser;
 module.exports.updateTable = updateTable;
+module.exports.checkMatch = checkMatch;
