@@ -146,10 +146,16 @@ function getUsernamesAndEmails() {
         let newQuery = 'SELECT Email_Id, Username FROM User_Details';
 
         connection.query(newQuery, function (error, userprofile, fields) {
-            console.log(userprofile[0]);
+            // console.log(userprofile[0]);
             if (error)
                 throw error;
-                resolve(userprofile)
+                let emails = userprofile.map(profile => {
+                    return profile.Email_Id;
+                })
+                let  usernames = userprofile.map(profile => {
+                    return profile.Username;
+                })
+                resolve({emails : emails, usernames : usernames})
         })
 
  
