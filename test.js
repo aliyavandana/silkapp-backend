@@ -17,6 +17,7 @@
 //         throw error;
 // })
 var database = require('./database')
+var mongodatabase = require('./mongodatabase')
 
 // let req = {
 //     body : {
@@ -39,11 +40,16 @@ var database = require('./database')
 //     })
 
 let body = {
-    email : "Aliya",
-    password = "aliyaboni",
-    user_type = 'client'
+    user_id : "Aliya",
+
 }
 
-database.checkLogin(body).then(result => {
-    console.log(result)
+// database.checkLogin(body).then(result => {
+//     console.log(result)
+// })
+
+mongodatabase.getJob(body)
+.then(JobId =>{
+    // res.send({'jobid' : JobId});
+    console.log(JobId)
 })

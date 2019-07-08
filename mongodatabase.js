@@ -144,6 +144,7 @@ function getJob(body) {
                     //     allfreelancers.push(doc)
                     //     console.log(doc);
                     // });
+                    console.log(documents)
                     resolve(documents[0]._id)
                 }
             });
