@@ -141,8 +141,23 @@ function checkMatch(job_id) {
     })
 }
 
+function getUsernamesAndEmails() {
+    return new Promise((resolve, reject) => {
+        let newQuery = 'SELECT Email_Id, Username FROM User_Details';
+
+        connection.query(newQuery, function (error, userprofile, fields) {
+            console.log(userprofile[0]);
+            if (error)
+                throw error;
+                resolve(userprofile)
+        })
+
+ 
+    })
+}
 module.exports.checkLogin = checkLogin;
 module.exports.addUser = addUser;
 module.exports.findUser = findUser;
 module.exports.updateTable = updateTable;
 module.exports.checkMatch = checkMatch;
+module.exports.getUsernamesAndEmails = getUsernamesAndEmails;

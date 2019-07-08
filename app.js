@@ -121,6 +121,12 @@ app.post('/updateMatchTable',(req, res) => {
     })
 })
 
+app.get('/getUsernamesAndEmails', (req, res) => {
+    database.getUsernamesAndEmails().then(response => {
+        res.send(response);
+    })
+})
+
 // allJobs
 
 // app.post('/getData', function (req, res) {
