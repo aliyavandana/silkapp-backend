@@ -18,22 +18,32 @@
 // })
 var database = require('./database')
 
-let req = {
-    body : {
-        "email": "aliyaboni123@gmail.com",
-        "firstname": "aliya",
-        "lastname": "boni",
-        "password": "aliya123",
-        "phonenumber": "8448637285",
-        "username": "aliyaboni",
-        "user_type" : 'freelancer'
-    }
+// let req = {
+//     body : {
+//         "email": "aliyaboni123@gmail.com",
+//         "firstname": "aliya",
+//         "lastname": "boni",
+//         "password": "aliya123",
+//         "phonenumber": "8448637285",
+//         "username": "aliyaboni",
+//         "user_type" : 'freelancer'
+//     }
+// }
+// database.addUser(req.body)
+//     .then(result =>{
+//         if(result) {
+//             res.send({status : "Success"});
+//         } else {
+//             res.send({status : "Failed"});
+//         }
+//     })
+
+let body = {
+    email : "Aliya",
+    password = "aliyaboni",
+    user_type = 'client'
 }
-database.addUser(req.body)
-    .then(result =>{
-        if(result) {
-            res.send({status : "Success"});
-        } else {
-            res.send({status : "Failed"});
-        }
-    })
+
+database.checkLogin(body).then(result => {
+    console.log(result)
+})
