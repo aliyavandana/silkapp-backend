@@ -28,7 +28,7 @@ function checkLogin(body) {
             console.log('inside the the query');
             if (error)
                 throw error;
-            if (userprofile.length === 1) {
+            if (userprofile.length >= 1) {
                 resolve(true);
             } else {
                 resolve(false);
